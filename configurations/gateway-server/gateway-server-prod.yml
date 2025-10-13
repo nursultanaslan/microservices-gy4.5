@@ -1,0 +1,5 @@
+#productionda geçerli kod
+eureka:
+  client:
+    service-url:
+      defaultZone: https://discovery.turkcell.com.tr/eureka/

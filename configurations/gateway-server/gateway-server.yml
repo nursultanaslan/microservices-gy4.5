@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: product-service-route
+              uri: lb://product-service
+              predicates:
+                - Path=/api/v1/products/**
+            - id: payment-service-route
+              uri: lb://payment-service
+              predicates:
+                - Path=/api/v1/payments/**
+            - id: cart-service-route
+              uri: lb://cart-service
+              predicates:
+                - Path=/api/v1/carts/**
+            - id: order-service-route
+              uri: lb://order-service
+              predicates:
+                - Path=/api/v1/orders/**
+
+#kendini eurekaya tanitiyor(kaydediyor bilgilerini)
+#ba?ka serviceleri de kullanarak yönlendirme alabiliyor
+#tüm ortamlarda geçerli kod
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+
+
+server:
+  port: 8888
