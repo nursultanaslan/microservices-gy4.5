@@ -1,4 +1,4 @@
-#konfigurasyonlar? nereden çekecegimi belirleyecegim
+#konfigurasyonlari nereden Ã§ekecegimi belirleyecegim
 spring:
   application:
     name: config-server
@@ -13,6 +13,7 @@ spring:
             - configurations/{application}
           clone-on-start: true
           force-pull: true
+          password: <token> #reponuz private ise
 
 server:
   port: 8989
