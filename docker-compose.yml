@@ -11,5 +11,25 @@ services:
     image: nursultanaslan/tcell-45-gateway-server
     ports:
       - "8888:8888"
+    depends_on:
+      - config-server
+    environment:
+      - CONFIG_URI=http://config-server:8989
+  order-service:
+    image: nursultanaslan/tcell-order-service
+    ports:
+      - "8082:8082"
+    environment:
+      - CONFIG_URI=http://config-server:8989
+  cart-service:
+    image: nursultanaslan/tcell-45-cart-service
+    ports:
+      - "8083:8083"
+    environment:
+      - CONFIG_URI=http://config-server:8989
+  product-service:
+    image: nursultanaslan/tcell-45-product-service
+    ports:
+      - "8080:8080"
     environment:
       - CONFIG_URI=http://config-server:8989

@@ -1,13 +1,9 @@
 spring:
   application:
     name: order-service
+  profiles:
+    active: dev
+  config:
+    import: configserver:${CONFIG_URI:http://localhost:8989}
 
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: "http://localhost:8761/eureka/"
 
-server:
-  port: 8082
