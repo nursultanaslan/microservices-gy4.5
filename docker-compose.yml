@@ -1,0 +1,15 @@
+services:
+  config-server:
+    image: nursultanaslan/turkcell-45-config-server
+    ports:
+      - "8989:8989"
+  discovery-server:
+    image: nursultanaslan/tcell-45-discovery-server
+    ports:
+      - "8761:8761"
+  gateway-server:
+    image: nursultanaslan/tcell-45-gateway-server
+    ports:
+      - "8888:8888"
+    environment:
+      - CONFIG_URI=http://config-server:8989

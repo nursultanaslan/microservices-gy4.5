@@ -22,7 +22,7 @@ spring:
                 - Path=/api/v1/orders/**
 
 #kendini eurekaya tanitiyor(kaydediyor bilgilerini)
-#ba?ka serviceleri de kullanarak yönlendirme alabiliyor
+#baska serviceleri de kullanarak yönlendirme alabiliyor
 #tüm ortamlarda geçerli kod
 eureka:
   client:
