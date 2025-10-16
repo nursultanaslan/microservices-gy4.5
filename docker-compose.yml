@@ -33,3 +33,9 @@ services:
       - "8080:8080"
     environment:
       - CONFIG_URI=http://config-server:8989
+  payment-service:
+    image: nursultanaslan/tcell-45-payment-service
+    ports:
+      - "8081:8081"
+    environment:
+      - CONFIG_URI=http://config-server:8989
