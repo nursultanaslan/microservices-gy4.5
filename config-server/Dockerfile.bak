@@ -2,7 +2,8 @@
 #işletim sistemi -> java -> maven -> proje -> run
 
 
-#SINGLE STAGE (ONERILMEZ) dosya boyutu büyük
+#SINGLE STAGE (ONERILMEZ) dosya boyutu büyük : Maven ve tamJDK'yı içerir.
+#Gerekli olanın ötesinde araç barındırır.
 #işletim sistemi -> java -> maven ✅
 FROM maven:3.9-eclipse-temurin-21
 
