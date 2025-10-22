@@ -1,0 +1,9 @@
+server:
+  port: 8761
+
+#false yaptik cunku discovery-service'in kendini eurekaya kaydetmeye
+#veya baska service'leri aramaya ihtiyaci yok
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
