@@ -57,6 +57,7 @@ services:
       - spring
     depends_on:
       - config-server
+      - discovery-server
 
   cart-service:
     image: nursultanaslan/tcell-45-cart-service
@@ -70,6 +71,7 @@ services:
       - spring
     depends_on:
       - config-server
+      - discovery-server
 
   payment-service:
     image: nursultanaslan/tcell-45-payment-service
@@ -83,6 +85,7 @@ services:
       - spring
     depends_on:
       - config-server
+      - discovery-server
 
   product-service:
     image: nursultanaslan/tcell-45-product-service
@@ -96,6 +99,7 @@ services:
       - spring
     depends_on:
       - config-server
+      - discovery-server
 
   kafka:
     image: apache/kafka:3.8.0
