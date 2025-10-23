@@ -15,6 +15,8 @@ services:
     container_name: config-server
     ports:
       - "8989:8989"
+    networks:
+      - spring
 
   discovery-server:
     image: nursultanaslan/tcell-45-discovery-server
@@ -23,6 +25,10 @@ services:
       - "8761:8761"
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
+    depends_on:
+      - config-server
 
   gateway-server:
     image: nursultanaslan/tcell-45-gateway-server
@@ -31,8 +37,11 @@ services:
       - "8888:8888"
     depends_on:
       - config-server
+      - discovery-server
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
 
   order-service:
     image: nursultanaslan/tcell-order-service
@@ -41,6 +50,11 @@ services:
       - "8082:8082"
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
+    depends_on:
+      - config-server
+      - discovery-server
 
   cart-service:
     image: nursultanaslan/tcell-45-cart-service
@@ -49,6 +63,11 @@ services:
       - "8083:8083"
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
+    depends_on:
+      - config-server
+      - discovery-server
 
   payment-service:
     image: nursultanaslan/tcell-45-payment-service
@@ -57,6 +76,11 @@ services:
       - "8081:8081"
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
+    depends_on:
+      - config-server
+      - discovery-server
 
   product-service:
     image: nursultanaslan/tcell-45-product-service
@@ -65,14 +89,19 @@ services:
       - "8080:8080"
     environment:
       - CONFIG_URI=http://config-server:8989
+    networks:
+      - spring
+    depends_on:
+      - config-server
+      - discovery-server
 
   kafka:
     image: apache/kafka:3.8.0
     container_name: kafka
     restart: unless-stopped
     ports:
-      - "9092:9092"   # container içi (PLAINTEXT) - diğer container'lar için
-      - "9094:9094"   # host'tan erişim (EXTERNAL)
+      - "9092:9092" # container içi (PLAINTEXT) - diğer container'lar için
+      - "9094:9094" # host'tan erişim (EXTERNAL)
     environment:
       # KRaft (ZooKeeper yok)
       KAFKA_PROCESS_ROLES: "broker,controller"
@@ -106,13 +135,12 @@ services:
       # Log dizini (container içi)
       KAFKA_LOG_DIRS: "/var/lib/kafka/data"
 
-    volumes:  #bilgiler oluşturduğumuz volume'e yazılsın her defasında silinmesin
+    volumes: #bilgiler oluşturduğumuz volume'e yazılsın her defasında silinmesin
       - kafka-data:/var/lib/kafka/data
-    networks:  #oluşturduğumuz networke bağlansın
+    networks: #oluşturduğumuz networke bağlansın
       - kafkanet
 
-
-#kafka service'ine bağlanır. hangi service'ler ayakta hangi topicler var, hangi brokerlar var bunları gözlemleyebiliriz.
+  #kafka service'ine bağlanır. hangi service'ler ayakta hangi topicler var, hangi brokerlar var bunları gözlemleyebiliriz.
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
     container_name: kafka-ui
@@ -135,3 +163,5 @@ volumes:
 
 networks:
   kafkanet:
+  spring:
+    driver: bridge

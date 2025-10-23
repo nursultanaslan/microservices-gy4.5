@@ -2,7 +2,7 @@ spring:
   application:
     name: gateway-server
   profiles:
-    active: dev
+    active: docker
   config:  #istegi atacagım alan yani configserverin urli (gateway istegi config serverdan cekebilsin diye)
     import: configserver:${CONFIG_URI:http://localhost:8989}
 
