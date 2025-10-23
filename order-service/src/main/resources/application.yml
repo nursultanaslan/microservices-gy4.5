@@ -2,7 +2,7 @@ spring:
   application:
     name: order-service
   profiles:
-    active: dev
+    active: docker
   config:
     import: configserver:${CONFIG_URI:http://localhost:8989}
 
